@@ -1,0 +1,6 @@
+**/nbproject/private/
+build/
+*.log
+manifest.mf
+derby.properties
+build.xml
