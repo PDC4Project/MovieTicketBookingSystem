@@ -25,12 +25,14 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
 import javax.swing.border.Border;
+
 /**
  * @author zk
  */
 public class OrderPanel extends JFrame {
 
     private JTabbedPane tp;
+
     public OrderPanel() {
         this.setContentPane(addMoviePic());
         this.setBounds(((Toolkit.getDefaultToolkit().getScreenSize().width) / 2) - 300,
@@ -38,10 +40,9 @@ public class OrderPanel extends JFrame {
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
     }
 
-                    
     public JTabbedPane addMoviePic() {
         tp = new JTabbedPane();
-        try {         
+        try {
             MovieDao movieDao = new MovieDao();
             List<Movie> movieList = movieDao.getList();
             for (int i = 0; i < movieList.size(); i++) {
@@ -54,7 +55,7 @@ public class OrderPanel extends JFrame {
                 gbc.weighty = 100;
                 gbc.anchor = GridBagConstraints.CENTER;
                 jp.setLayout(gb);
-                
+
                 /*StartTime放映时间 RoomId放映厅 price售价  isBook选座购票*/
                 gbc.gridx = 0;
                 gbc.gridy = 0;
@@ -63,18 +64,18 @@ public class OrderPanel extends JFrame {
                 JLabel jLabel2 = new JLabel(movie.getName());
                 gb.setConstraints(jLabel2, gbc);
                 jp.add(jLabel2);
-                
+
                 ImageIcon image = new ImageIcon(movie.getPicUrl());
                 image.setImage(image.getImage().getScaledInstance(200, 240, Image.SCALE_DEFAULT));
                 gbc.gridx = 0;
                 gbc.gridy = 3;
                 gbc.gridwidth = 1;
-                gbc.gridheight = 2;
-                
+                gbc.gridheight = 1;
+
                 JLabel jLabel = new JLabel(image);
                 gb.setConstraints(jLabel, gbc);
                 jp.add(jLabel);
-                
+
                 gbc.gridy = 5;
                 gbc.gridx = 0;
                 gbc.gridwidth = 2;
@@ -83,27 +84,37 @@ public class OrderPanel extends JFrame {
                 gbc.fill = GridBagConstraints.BOTH;
                 gb.setConstraints(jPanel, gbc);
                 jp.add(jPanel);
-                
+
                 TimetableDao td = new TimetableDao();
                 List<Timetable> list = td.getList(movie.getId());
+
                 for (int j = 0; j < list.size(); j++) {
                     Timetable t = list.get(j);
                     gbc.gridy = j + 6;
                     gbc.gridx = 0;
                     gbc.gridwidth = 2;
                     gbc.gridheight = 1;
-                    JPanel jPanel2 = addTimeTable(t.getStartTime(),t.getEndTime(),t.getRoomId(),t.getPrice());
+                    JPanel jPanel2 = addTimeTable(t.getStartTime(), t.getEndTime(), t.getRoomId(), t.getPrice());
                     gbc.fill = GridBagConstraints.BOTH;
                     gb.setConstraints(jPanel2, gbc);
                     jp.add(jPanel2);
                 }
-                tp.addTab("Movie " + (i + 1), scrollPane);                
+                if (list.size() < 10) {
+                    for (int k = 0; k < 10 - list.size(); k++) {
+                        JPanel blank = new JPanel();
+                        gbc.gridy = list.size() + 6 + k;
+                        gbc.gridx = 0;
+                        gbc.gridheight = 1;                      
+                        gb.setConstraints(blank, gbc);
+                        jp.add(blank);
+                    }
+                }
+                tp.addTab("Movie " + (i + 1), scrollPane);
             }
-           
-        } catch (SQLException ex) {      
+        } catch (SQLException ex) {
+        }
+        return tp;
     }
-         return tp;
-}
 
     public JPanel addTitle() {
         JPanel titlePanel = new JPanel();
@@ -151,5 +162,5 @@ public class OrderPanel extends JFrame {
                 new OrderPanel().setVisible(true);
             }
         });
-    }  
+    }
 }
