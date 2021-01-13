@@ -4,3 +4,5 @@ build/
 manifest.mf
 derby.properties
 build.xml
+*.txt
+/dist/
