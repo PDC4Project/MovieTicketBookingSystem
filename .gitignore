@@ -4,5 +4,8 @@ build/
 manifest.mf
 derby.properties
 build.xml
+<<<<<<< HEAD
 *.txt
+=======
+>>>>>>> develop-zk
 /dist/
