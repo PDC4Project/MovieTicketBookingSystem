@@ -72,12 +72,7 @@ class SwingLoginExample {
         JLabel Label_42 = new JLabel("xxx");
         Label_42.setBounds(100,140,165,25);
         panel.add(Label_42);   
-        /* 
-         *这个类似用于输入的文本域
-         * 但是输入的信息会以点号代替，用于包含密码的安全性
-         */
 
-        // 创建登录按钮
         JButton loginButton = new JButton("退票");
         loginButton.setBounds(10, 500, 80, 25);
         panel.add(loginButton);
