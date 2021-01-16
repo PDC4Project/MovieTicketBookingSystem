@@ -11,6 +11,7 @@ public class Order {
     int movieId;
     int roomId;
     int seatId;
+    int timetableId;
 
     public int getId() {
         return id;
@@ -52,4 +53,12 @@ public class Order {
         this.seatId = seatId;
     }
 
+    public int getTimetableId() {
+        return timetableId;
+    }
+
+    public void setTimetableId(int timetableId) {
+        this.timetableId = timetableId;
+    }
+  
 }
