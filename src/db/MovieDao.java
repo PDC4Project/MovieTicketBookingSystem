@@ -33,7 +33,7 @@ public class MovieDao {
 
   
     public List getList() throws SQLException {
-     String sql = "select * from movie";
+        String sql = "select * from movie";
         ResultSet rs = conn.createStatement().executeQuery(sql);
         List<Movie> list = new ArrayList<>();
         while (rs.next()) {

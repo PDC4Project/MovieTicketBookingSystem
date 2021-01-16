@@ -27,6 +27,7 @@ public class TimetableDao {
         List<Timetable> list = new ArrayList<>();
         while (rs.next()) {
             Timetable timetable = new Timetable();
+            timetable.setId(rs.getInt("id"));
             timetable.setRoomId(rs.getInt("room_id"));
             timetable.setMovieId(rs.getInt("movie_id"));
             timetable.setPrice(rs.getDouble("price"));
