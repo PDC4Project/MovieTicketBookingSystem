@@ -85,7 +85,7 @@ class SwingLoginExample {
     }
 
 }
-public class JavaApplication1 {
+public class CheckPanel {
 
     /**
      * @param args the command line arguments
