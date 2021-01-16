@@ -143,7 +143,7 @@ public class OrderPanel extends JFrame {
         JButton b = new JButton("选座购票");
 
         b.addActionListener(new ActionListener() {
-
+  //todo-new the seatpanel according to the room id;
             public void actionPerformed(ActionEvent e) {
                 new SeatPanel().setVisible(true);
             }
