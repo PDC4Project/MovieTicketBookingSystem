@@ -20,8 +20,7 @@ public class DB {
                     + ";create=false");
             Class.forName(driver);
             System.out.println("Connected to database: " + dbName);
-        } catch (SQLException ex) {
-        } catch (ClassNotFoundException ex) {
+        } catch (SQLException | ClassNotFoundException ex) {
         }
     }
 
