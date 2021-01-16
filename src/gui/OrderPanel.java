@@ -143,7 +143,7 @@ public class OrderPanel extends JFrame {
         JButton b = new JButton("选座购票");
 
         b.addActionListener(new ActionListener() {
-  //todo-new the seatpanel according to the room id;
+         //todo-new the seatpanel according to the room id;
             public void actionPerformed(ActionEvent e) {
                 new SeatPanel().setVisible(true);
             }
@@ -157,10 +157,8 @@ public class OrderPanel extends JFrame {
     }
 
     public static void main(String args[]) {
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new OrderPanel().setVisible(true);
-            }
+        java.awt.EventQueue.invokeLater(() -> {
+            new OrderPanel().setVisible(true);
         });
     }
 }
