@@ -3,14 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package gui;
+package pdc;
 
-import java.awt.BorderLayout;
-import java.awt.Dimension;
 import java.awt.EventQueue;
-import java.awt.GridLayout;
 import java.awt.TextField;
-import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
@@ -24,10 +20,7 @@ import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-import javax.swing.JPanel;
 import javax.swing.JTextField;
-import javax.swing.SwingConstants;
-import javax.swing.border.EmptyBorder;
 
 
 
@@ -47,41 +40,29 @@ public class LoginPanel extends JFrame  {
      super();
      JFrame frame=new JFrame();
      frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+     frame.setVisible(true);
+     frame.setResizable(false);
      frame.getContentPane().setLayout(null);
      frame.setTitle("Login Panel");
-     Toolkit toolbox= Toolkit.getDefaultToolkit();
-     Dimension screenSize=toolbox.getScreenSize();
      frame.setSize(500,340);
-     frame.setLocation((screenSize.width-getWidth())/2,(screenSize.height-getHeight())/2);
-     
-     final JPanel mainPanel = new JPanel();
-     mainPanel.setLayout(new BorderLayout());
-     mainPanel.setBorder(new EmptyBorder(0,0,0,0));
-     getContentPane().add(mainPanel);
-     
-     final JPanel CenterPanel=new JPanel();
-     mainPanel.add(CenterPanel);
      
  
      label2=new JLabel("username");
-     label2.setPreferredSize(new Dimension(0,0));
-     label2.setMinimumSize(new Dimension(0,0));
      label2.setBounds(125, 95, 64, 20);
-     CenterPanel.add(label2);
+     frame.add(label2);
      
      label3=new JLabel("password");
-     label3.setPreferredSize(new Dimension(0,0));
-     label3.setMinimumSize(new Dimension(0,0));
      label3.setBounds(125, 165, 64, 20);
-     CenterPanel.add(label3);
+     frame.add(label3);
      
      
      button4=new JButton("Login");
      button4.setBounds(286, 223, 106, 20);
-     button4.addActionListener(new PanelLoginAction());
+     frame.add(button4);
      
      button5=new JButton("register");
      button5.setBounds(141, 223, 106, 20);
+     frame.add(button5);
      button5.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
@@ -90,11 +71,10 @@ public class LoginPanel extends JFrame  {
 
 			}
 		});
+     
      name= new JTextField(15);
      name.setBounds(239, 95, 166, 20);
-     name.setPreferredSize(new Dimension(0,0));
-     name.setMinimumSize(new Dimension(0,0));
-     CenterPanel.add(name);
+     frame.add(name);
      
      passWord=new TextField(20);
      passWord.setBounds(239, 165, 166, 20);
@@ -106,7 +86,7 @@ public class LoginPanel extends JFrame  {
              }
          }
      });
-     CenterPanel.add(passWord);
+     frame.add(passWord);
      
      init();
    }
@@ -144,21 +124,13 @@ public class LoginPanel extends JFrame  {
 				}
 
 			}}
-
-}
-     
-		
-class CloseActionListener implements ActionListener{
-    public void actionPerformed(final ActionEvent e){
-        if(e.getActionCommand().equals("Exit")){
-                    System.exit(0);
-                }
-    }
-     public static void main(String args[]) {
-        EventQueue.invokeLater(new Runnable() {
-            public void run() {
+ public static void main(String args[]) {
+       EventQueue.invokeLater(new Runnable() {
+           public void run() {
                 new LoginPanel().setVisible(true);
-            }
+           }
         });
     }
 }
+     
+		

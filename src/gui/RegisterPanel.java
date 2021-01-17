@@ -3,13 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package gui;
+package pdc;
 
 import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
@@ -17,7 +15,6 @@ import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
@@ -25,58 +22,6 @@ import javax.swing.JTextField;
  *
  * @author 寒暄
  */
-class registerpart {
-    String username;
-    String password;
-    String confirmpassword;
-    String email;
-    String telephone;
-    
-    private String driver = "com.mysql.cj.jdbc.Driver";
-    private String url = "";
-    
-    void setName(String username) {
-        this.username = username;
-    }
-    void setPassword(String password) {
-        this.password = password;
-    }
-    void setconfirmpasswd(String confirmpassword) {
-        this.confirmpassword = confirmpassword;
-    }
-     void setemail(String email) {
-        this.email = email;
-    }
-      void settelephone(String telephone) {
-        this.telephone = telephone;
-    }
-    
-    
-    //判断注册的账号是否符合规则
-    boolean JudgeRegister() throws SQLException, ClassNotFoundException {
-        
-        if(this.username.equals("")) {
-            JOptionPane.showMessageDialog(null, " Username cannot be empty! ", "username", JOptionPane.ERROR_MESSAGE);
-            return false;
-        }
-        
-        if(this.password.equals("")) {
-            JOptionPane.showMessageDialog(null, "Password cannot be empty!", "password is empty", JOptionPane.ERROR_MESSAGE);
-            return false;
-        }
-        
-        if(!this.password.equals(this.confirmpassword)) {
-            JOptionPane.showMessageDialog(null, " The two passwords are inconsistent! ", " The password is inconsistent ", JOptionPane.ERROR_MESSAGE);
-            return false;
-        }
-        
-        //符合规则，弹出注册成功的窗口，并将账号添加数据库
-        JOptionPane.showMessageDialog(null, "Register successfully!");
-        
-        return true;
-    }
-}
-
 
 public class RegisterPanel extends JFrame{
    private JFrame frame;
@@ -85,13 +30,13 @@ public class RegisterPanel extends JFrame{
         init();
     }
     private void init() {
-                frame = new JFrame(); 
-                frame.setSize(602,536);
-                frame.setTitle("Register Panel");
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.setVisible(true);
-		frame.setResizable(false);
-		frame.getContentPane().setLayout(null);
+            frame = new JFrame(); 
+            frame.setSize(602,580);
+            frame.setTitle("Register Panel");
+	    frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	    frame.setVisible(true);
+	    frame.setResizable(false);
+	    frame.getContentPane().setLayout(null);
             
             
             JLabel name = new JLabel("name:");
@@ -195,5 +140,5 @@ public class RegisterPanel extends JFrame{
 			}
 		});
 	}
-
 }
+
