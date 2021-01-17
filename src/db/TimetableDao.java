@@ -20,13 +20,16 @@ public class TimetableDao {
         db = new DB();
         conn = db.getConnection();
     }
-
+    public int getMovieId(int timetableId, int roomId){
+        return 0;
+    }
     public List getList(int id) throws SQLException {
         String sql = "select * from timetable where movie_id ="+id;
         ResultSet rs = conn.createStatement().executeQuery(sql);
         List<Timetable> list = new ArrayList<>();
         while (rs.next()) {
             Timetable timetable = new Timetable();
+            timetable.setId(rs.getInt("id"));
             timetable.setRoomId(rs.getInt("room_id"));
             timetable.setMovieId(rs.getInt("movie_id"));
             timetable.setPrice(rs.getDouble("price"));

@@ -7,7 +7,7 @@ package entity;
 public class Seat {
     int id;
     int roomId;
-    boolean isBook;
+    int timetableId;
 
     public int getId() {
         return id;
@@ -25,12 +25,12 @@ public class Seat {
         this.roomId = roomId;
     }
 
-    public boolean isIsBook() {
-        return isBook;
+    public int getTimetableId() {
+        return timetableId;
     }
 
-    public void setIsBook(boolean isBook) {
-        this.isBook = isBook;
-    }
-    
+    public void setTimetableId(int timetableId) {
+        this.timetableId = timetableId;
+    } 
+ 
 }

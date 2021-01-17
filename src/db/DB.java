@@ -28,8 +28,13 @@ public class DB {
         return conn;
     }
     public static void main(String[] args) {
+<<<<<<< HEAD
         
         DB d = new DB();
         Connection connection = d.getConnection();
+=======
+        DB db = new DB();
+       Connection conn = db.getConnection();
+>>>>>>> develop-zk
     }
 }
