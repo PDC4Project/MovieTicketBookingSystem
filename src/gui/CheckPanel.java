@@ -13,7 +13,10 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
 import javax.swing.JTextField; 
+import javax.swing.table.DefaultTableModel;
 public class CheckPanel {
     
     public static void main(String[] args) {    
@@ -26,6 +29,10 @@ public class CheckPanel {
         frame.add(panel);
         placeComponents(panel);
         frame.setVisible(true);
+        
+        
+        
+        
     }
 
     private static void placeComponents(JPanel panel) {
@@ -57,14 +64,20 @@ public class CheckPanel {
         JLabel Label_41 = new JLabel("您的座位：");
         Label_41.setBounds(400,50,80,25);
         panel.add(Label_41);
-
+        
+        
+//        JTextField Text = new JTextField(20);
+//        Text.setBounds(10,80,500,400);
+//        panel.add(Text);
+        JTable table = new JTable(10, 4);
+        table.setBounds(10,80,500,160);
+        panel.add(table);
 
         JButton loginButton = new JButton("退票");
         loginButton.setBounds(10, 500, 80, 25);
         panel.add(loginButton);
 
-        TextField m = new TextField(20);
-        panel.add(m);
+
     }
 
 }
