@@ -40,12 +40,10 @@ class RefundPanel {
         userLabel.setBounds(280,20,80,25);
         panel.add(userLabel);
 
-        JButton loginButton = new JButton("返回");
-        loginButton.setBounds(10, 500, 80, 25);
-        panel.add(loginButton);
-         JButton b = new JButton("选座购票");
-
-        b.addActionListener(new ActionListener() {
+        JButton ReturnButton = new JButton("返回");
+        ReturnButton.setBounds(10, 500, 80, 25);
+        panel.add(ReturnButton);
+        ReturnButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 
             }
