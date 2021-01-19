@@ -10,15 +10,12 @@ import java.awt.GridLayout;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JToggleButton;
 import static javax.swing.WindowConstants.DISPOSE_ON_CLOSE;
@@ -41,8 +38,10 @@ public class SeatPanel extends JFrame {
     private int movieId;
     private OrderDao orderDao;
     private Map<Integer, Order> orderMap;
-
+    private Map<Integer, Seat> seatMap;
+    private JFrame frame;
     public SeatPanel(String account, int roomId, int timetableId, int movieId) {
+        frame = this;
         this.roomId = roomId;
         this.account = account;
         this.movieId = movieId;
@@ -50,6 +49,7 @@ public class SeatPanel extends JFrame {
         seatDao = new SeatDao();
         seatIdList = seatDao.getSeatId(roomId, timetableId);
         orderMap = new HashMap<>();
+        seatMap = new HashMap<>();
         JPanel jPanel = new JPanel();
         jPanel.setLayout(new BorderLayout());
         jPanel.add("Center", addSeat(seatIdList));
@@ -85,17 +85,23 @@ public class SeatPanel extends JFrame {
                 public void stateChanged(ChangeEvent e) {
                    
                     JToggleButton toggleBtn = (JToggleButton) e.getSource();
-                     seatId = Integer.valueOf(toggleBtn.getText());
+                     seatId = Integer.valueOf(toggleBtn.getText())-1;
                     if (toggleBtn.isSelected() == true) {
-                        Order order = new Order();
+                        Order order = new Order();                 
                         order.setAccount(account);
                         order.setMovieId(movieId);
                         order.setRoomId(roomId);
                         order.setTimetableId(timetableId);
                         order.setSeatId(seatId);
                         orderMap.put(seatId, order);
+                        Seat seat  = new Seat();
+                        seat.setId(seatId);
+                        seat.setRoomId(roomId);
+                        seat.setTimetableId(timetableId);
+                        seatMap.put(seatId,seat);
                     } else {
                         orderMap.remove(seatId);
+                        seatMap.remove(seatId);
                     }
                 }
             });
@@ -115,6 +121,8 @@ public class SeatPanel extends JFrame {
                     System.out.println("null");
                 } else {
                     orderDao.insert(orderMap);
+                    seatDao.insertSeatId(seatMap);  
+                    frame.dispose();
                 }
             }
         });
