@@ -9,6 +9,8 @@ package gui;
  *
  * @author DELL
  */
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -41,6 +43,15 @@ class RefundPanel {
         JButton loginButton = new JButton("返回");
         loginButton.setBounds(10, 500, 80, 25);
         panel.add(loginButton);
+         JButton b = new JButton("选座购票");
+
+        b.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                
+            }
+        });
+
+        
     }
 
 }

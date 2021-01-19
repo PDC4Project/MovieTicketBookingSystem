@@ -13,7 +13,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField; 
-class SwingLoginExample {
+public class CheckPanel {
     
     public static void main(String[] args) {    
 
@@ -33,10 +33,6 @@ class SwingLoginExample {
 
 
         JLabel userLabel = new JLabel("订票成功！");
-        /* 
-         * setBounds(x, y, width, height)
-         * x 和 y 指定左上角的新位置，由 width 和 height 指定新的大小。
-         */
         userLabel.setBounds(280,20,80,25);
         panel.add(userLabel);
 
@@ -76,6 +72,8 @@ class SwingLoginExample {
         JButton loginButton = new JButton("退票");
         loginButton.setBounds(10, 500, 80, 25);
         panel.add(loginButton);
+
+        
     }
 
 }
