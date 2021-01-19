@@ -32,8 +32,9 @@ import javax.swing.border.Border;
 public class OrderPanel extends JFrame {
 
     private JTabbedPane tp;
-
-    public OrderPanel() {
+    private String account;
+    public OrderPanel(String account) {
+        this.account = account;
         this.setContentPane(addMoviePic());
         this.setBounds(((Toolkit.getDefaultToolkit().getScreenSize().width) / 2) - 300,
                 ((Toolkit.getDefaultToolkit().getScreenSize().height) / 2) - 300, 600, 700);
@@ -144,7 +145,7 @@ public class OrderPanel extends JFrame {
 
         b.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                new SeatPanel(roomId,timetableId).setVisible(true);
+                new SeatPanel(account,roomId,timetableId).setVisible(true);
             }
         });
         timeTablePanel.add(startTimeLabel);
@@ -157,7 +158,7 @@ public class OrderPanel extends JFrame {
 
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(() -> {
-            new OrderPanel().setVisible(true);
+            new OrderPanel("aaa").setVisible(true);
         });
     }
 }

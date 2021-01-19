@@ -34,9 +34,11 @@ public class SeatPanel extends JFrame {
     private List<Integer> seatIdList;
     private int timetableId;
     private int seatId;
+    private String account;
 
-    public SeatPanel(int roomId,int timetableId) {
+    public SeatPanel(String account,int roomId,int timetableId) {
         this.roomId = roomId;
+        this.account = account;
         this.timetableId = timetableId;
         seatDao = new SeatDao();
         seatIdList = seatDao.getSeatId(roomId,timetableId);
@@ -75,7 +77,7 @@ public class SeatPanel extends JFrame {
                 @Override
                 public void actionPerformed(ActionEvent e) {
                    Order order = new Order();                 
-                   order.setAccount("1");
+                   order.setAccount(account);
                    order.setMovieId(1);
                    order.setRoomId(roomId);
                    order.setTimetableId(timetableId);
@@ -105,7 +107,7 @@ public class SeatPanel extends JFrame {
             public void run() {
                 int roomId = 2;
                 int timetableId =2;
-                new SeatPanel(roomId,timetableId).setVisible(true);
+                new SeatPanel("aaa",roomId,timetableId).setVisible(true);
             }
         });
     }

@@ -11,7 +11,7 @@ package entity;
  */
 public class Customer {
     String name;
-    String username;
+    String account;
     String password;
     String email;
     String telephone;
@@ -22,13 +22,16 @@ public class Customer {
     public void setName(String name){
         this.name=name;
     }
+
+    public String getAccount() {
+        return account;
+    }
+
+    public void setAccount(String account) {
+        this.account = account;
+    }
     
-    public String getUsername(){
-        return username;
-    }
-    public void setUserame(String username){
-        this.username=username;
-    }
+  
     public String getPassword(){
         return password;
     }

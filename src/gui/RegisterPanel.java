@@ -1,21 +1,18 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-package pdc;
+package gui;
 
-import gui.RegisterResult;
+import db.CustomerDao;
+import entity.Customer;
+import gui.RegisterResultPanel;
 import java.awt.EventQueue;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
@@ -23,123 +20,152 @@ import javax.swing.JTextField;
  *
  * @author 寒暄
  */
+public class RegisterPanel extends JFrame {
 
-public class RegisterPanel extends JFrame{
-   private JFrame frame;
-   
+    private JFrame frame;
+    private CustomerDao customerDao;
+    private JOptionPane jop;
+
     public RegisterPanel() {
         init();
     }
+
     private void init() {
-            frame = new JFrame(); 
-            frame.setSize(602,580);
-            frame.setTitle("Register Panel");
-	    frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-	    frame.setVisible(true);
-	    frame.setResizable(false);
-	    frame.getContentPane().setLayout(null);
-            
-            
-            JLabel name = new JLabel("name:");
-            name.setBounds(100, 61, 127, 20);
-            frame.add(name);
-            
-            JLabel username= new JLabel("username:");
-            username.setBounds(100, 116, 127, 20);
-            frame.add(username);
+        frame = new JFrame();
+        frame.setTitle("Register Panel");
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setVisible(true);
+        frame.setResizable(false);
+        frame.getContentPane().setLayout(null);
+        frame.setBounds(((Toolkit.getDefaultToolkit().getScreenSize().width) / 2) - 300,
+                ((Toolkit.getDefaultToolkit().getScreenSize().height) / 2) - 300, 602, 580);
+        jop = new JOptionPane();
 
-            JLabel Password = new JLabel("password:");
-            Password.setBounds(100, 171, 127, 20);
-            frame.add(Password);  
-               
-            JLabel confirm = new JLabel("confirm password:");
-            confirm.setBounds(100, 226, 127, 20);
-            frame.add(confirm);
-            
-            JLabel emailStr = new JLabel("email:");
-            emailStr.setBounds(100, 281, 127, 20);
-            frame.add(emailStr);
-            
-            JLabel teleStr = new JLabel("telephone number:");
-            teleStr.setBounds(100, 336, 127, 20);
-            frame.add(teleStr);
-            
-            JTextField Name= new JTextField();
-            Name.setBounds(257, 61, 200, 20);
-            frame.add(Name);
-            
-            JTextField userName = new JTextField();
-            userName.setBounds(257, 116, 200, 20);
-            frame.add(userName);
+        JLabel nameLabel = new JLabel("name:");
+        nameLabel.setBounds(100, 61, 127, 20);
+        frame.add(nameLabel);
 
-            JPasswordField password = new JPasswordField();
-            password.setBounds(257, 171, 200, 20);
-            frame.add(password);
+        JLabel accountLabel = new JLabel("account:");
+        accountLabel.setBounds(100, 116, 127, 20);
+        frame.add(accountLabel);
 
-            JPasswordField confirmPassword = new JPasswordField();
-            confirmPassword.setBounds(257, 226, 200, 20);
-            frame.add(confirmPassword);
-            
-            JTextField email = new JTextField();
-            email.setBounds(257, 281, 200, 20);
-            frame.add(email);
-            
-            JTextField telephone = new JTextField();
-            telephone.setBounds(257, 336, 200, 20);
-            frame.add(telephone);
-            
-            
-            JButton buttonregister = new JButton("register");
-            buttonregister.setBounds(233, 486, 120, 20);
-            frame.add(buttonregister);
-            buttonregister.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-                            
-				ConnectBridge c = new ConnectBridge();
+        JLabel passwordLabel = new JLabel("password:");
+        passwordLabel.setBounds(100, 171, 127, 20);
+        frame.add(passwordLabel);
 
-				Connection conn = c.getConnect();
+        JLabel confirmLabel = new JLabel("confirm password:");
+        confirmLabel.setBounds(100, 226, 127, 20);
+        frame.add(confirmLabel);
 
-				PreparedStatement ps = null;
-				try {
-					ps = conn.prepareStatement("insert into user values(default, ?,?,?,?,?,?)");
+        JLabel emailStr = new JLabel("email:");
+        emailStr.setBounds(100, 281, 127, 20);
+        frame.add(emailStr);
 
-					ps.setString(1, Name.getText());
-                                        ps.setString(2, userName.getText());
-                                        ps.setString(3, password.getText());
-					ps.setString(4, confirmPassword.getText());
-                                        ps.setString(5, email.getText());
-                                        ps.setString(6, telephone.getText());
-                                         //String passwd = new String (password.getPassword());
-                                         //String confrimpasswd = new String (confirmPassword.getPassword());
-					ps.execute();
+        JLabel teleStr = new JLabel("telephone number:");
+        teleStr.setBounds(100, 336, 127, 20);
+        frame.add(teleStr);
 
-					new RegisterResult();
-					frame.removeNotify();
-                                        
-				} catch (SQLException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
+        JTextField nameTF = new JTextField();
+        nameTF.setBounds(257, 61, 200, 20);
+        frame.add(nameTF);
 
-			}
-		});
-            
-            JCheckBox checkbox=new JCheckBox("I have read and accpeted the instructions");
-            checkbox.setBounds(100, 438, 366, 20);
-            frame.add(checkbox);
+        JTextField accountTF = new JTextField();
+        accountTF.setBounds(257, 116, 200, 20);
+        frame.add(accountTF);
+
+        JPasswordField passwordTF = new JPasswordField();
+        passwordTF.setBounds(257, 171, 200, 20);
+        frame.add(passwordTF);
+
+        JPasswordField confirmPasswordTF = new JPasswordField();
+        confirmPasswordTF.setBounds(257, 226, 200, 20);
+        frame.add(confirmPasswordTF);
+
+        JTextField emailTF = new JTextField();
+        emailTF.setBounds(257, 281, 200, 20);
+        frame.add(emailTF);
+
+        JTextField telephoneTF = new JTextField();
+        telephoneTF.setBounds(257, 336, 200, 20);
+        frame.add(telephoneTF);
+
+        JButton buttonregister = new JButton("register");
+        buttonregister.setBounds(233, 486, 120, 20);
+        frame.add(buttonregister);
+        buttonregister.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                customerDao = new CustomerDao();
+                Customer c = new Customer();
+                c.setName(nameTF.getText());
+                c.setAccount(accountTF.getText());
+                c.setPassword(String.valueOf(passwordTF.getPassword()));
+                c.setEmail(emailTF.getText());
+                c.setTelephone(telephoneTF.getText());
+                try {
+                    if (judgeRegister(accountTF.getText(), String.valueOf(passwordTF.getPassword()), String.valueOf(confirmPasswordTF.getPassword()))) {
+                        if (!customerDao.checkAccount(accountTF.getText())) {
+                            if (customerDao.insert(c)) {
+                                new RegisterResultPanel();
+                            }
+                        } else {
+                            JOptionPane.showMessageDialog(null, " The account has existed!",
+                                    " The account has existed! ", JOptionPane.ERROR_MESSAGE);
+                            new RegisterPanel();
+                        }
+
+                    } else {
+                    }
+                } catch (SQLException | ClassNotFoundException ex) {
+                }
+
+                frame.removeNotify();
+            }
+        });
+
+        JCheckBox checkbox = new JCheckBox("I have read and accpeted the instructions");
+        checkbox.setBounds(100, 438, 366, 20);
+        frame.add(checkbox);
     }
-        
-        public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					RegisterPanel window = new RegisterPanel();
-					window.frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-}
 
+    public boolean judgeRegister(String account, String password, String confirmPassword) throws SQLException, ClassNotFoundException {
+
+        if (account.equals("")) {
+            JOptionPane.showMessageDialog(null, " Account cannot be empty! ",
+                    "Account", JOptionPane.ERROR_MESSAGE);
+            new RegisterPanel();
+
+            return false;
+        }
+
+        if (password.equals("")) {
+            JOptionPane.showMessageDialog(null, "Password cannot be empty!",
+                    "Password is empty", JOptionPane.ERROR_MESSAGE);
+            new RegisterPanel();
+
+            return false;
+        }
+
+        if (!password.equals(confirmPassword)) {
+            JOptionPane.showMessageDialog(null, " The two passwords are inconsistent! ",
+                    " The password is inconsistent ", JOptionPane.ERROR_MESSAGE);
+            new RegisterPanel();
+
+            return false;
+        }
+
+        return true;
+    }
+
+    public static void main(String[] args) {
+        EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                try {
+                    RegisterPanel window = new RegisterPanel();
+                    window.frame.setVisible(true);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+    }
+}
