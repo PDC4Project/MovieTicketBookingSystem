@@ -12,11 +12,20 @@ import java.sql.Time;
  * @author syfhz
  */
 public class Timetable {
+    int id;
     int movieId;
     int roomId;
     Time startTime;
     Time endTime;
     double price;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public int getMovieId() {
         return movieId;

@@ -32,8 +32,9 @@ import javax.swing.border.Border;
 public class OrderPanel extends JFrame {
 
     private JTabbedPane tp;
-
-    public OrderPanel() {
+    private String account;
+    public OrderPanel(String account) {
+        this.account = account;
         this.setContentPane(addMoviePic());
         this.setBounds(((Toolkit.getDefaultToolkit().getScreenSize().width) / 2) - 300,
                 ((Toolkit.getDefaultToolkit().getScreenSize().height) / 2) - 300, 600, 700);
@@ -94,7 +95,7 @@ public class OrderPanel extends JFrame {
                     gbc.gridx = 0;
                     gbc.gridwidth = 2;
                     gbc.gridheight = 1;
-                    JPanel jPanel2 = addTimeTable(t.getStartTime(), t.getEndTime(), t.getRoomId(), t.getPrice());
+                    JPanel jPanel2 = addTimeTable(t.getId(), t.getStartTime(), t.getEndTime(), t.getRoomId(), t.getPrice());
                     gbc.fill = GridBagConstraints.BOTH;
                     gb.setConstraints(jPanel2, gbc);
                     jp.add(jPanel2);
@@ -132,7 +133,7 @@ public class OrderPanel extends JFrame {
         return titlePanel;
     }
 
-    public JPanel addTimeTable(Time startTime, Time endTime, int roomId, double price) {
+    public JPanel addTimeTable(int timetableId,Time startTime, Time endTime, int roomId, double price) {
         JPanel timeTablePanel = new JPanel();
         Border border = BorderFactory.createLineBorder(Color.BLACK);
         timeTablePanel.setBorder(border);
@@ -143,9 +144,8 @@ public class OrderPanel extends JFrame {
         JButton b = new JButton("选座购票");
 
         b.addActionListener(new ActionListener() {
-  //todo-new the seatpanel according to the room id;
             public void actionPerformed(ActionEvent e) {
-                new SeatPanel().setVisible(true);
+                new SeatPanel(account,roomId,timetableId).setVisible(true);
             }
         });
         timeTablePanel.add(startTimeLabel);
@@ -157,10 +157,8 @@ public class OrderPanel extends JFrame {
     }
 
     public static void main(String args[]) {
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new OrderPanel().setVisible(true);
-            }
+        java.awt.EventQueue.invokeLater(() -> {
+            new OrderPanel("aaa").setVisible(true);
         });
     }
 }
