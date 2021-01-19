@@ -86,7 +86,7 @@ public class LoginPanel extends JFrame {
             try {
                 if (rs.next()) { 
                     frame.removeNotify();
-                    new OrderPanel().setVisible(true);
+                    new OrderPanel(account.getText()).setVisible(true);
                 } else {
                     JOptionPane pane = new JOptionPane("用户或密码错误");
                     JDialog dialog = pane.createDialog("警告");
