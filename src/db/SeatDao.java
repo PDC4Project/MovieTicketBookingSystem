@@ -1,10 +1,14 @@
 package db;
 
+import entity.Order;
+import entity.Seat;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author zk
@@ -18,8 +22,20 @@ public class SeatDao {
         db = new DB();
         conn = db.getConnection();
     }
-    public void insertSeatId(int roomId,int seatId,int timetableId){
-      //  String sql = "insert into seat room_id,sea"
+    public void insertSeatId(Map<Integer, Seat> seatMap){
+        String sql = "insert into seat(room_id,id,timetable_id) values (?,?,?)";
+        PreparedStatement ps = null;
+        for (Map.Entry<Integer, Seat> entry : seatMap.entrySet()) {
+            Seat seat = entry.getValue();
+            try {
+                ps = conn.prepareStatement(sql);
+                ps.setInt(1, seat.getRoomId());
+                ps.setInt(2, seat.getId());
+                ps.setInt(3, seat.getTimetableId());   
+                ps.execute();
+            } catch (SQLException ex) {
+            }
+        }
     }
     public List getSeatId(int roomId,int timetableId) {
         String sql = "select id from seat where room_id = " + roomId + "and timetable_id ="+ timetableId;
