@@ -95,7 +95,7 @@ public class OrderPanel extends JFrame {
                     gbc.gridx = 0;
                     gbc.gridwidth = 2;
                     gbc.gridheight = 1;
-                    JPanel jPanel2 = addTimeTable(t.getId(), t.getStartTime(), t.getEndTime(), t.getRoomId(), t.getPrice());
+                    JPanel jPanel2 = addTimeTable(t.getId(), t.getStartTime(), t.getEndTime(), t.getRoomId(), t.getPrice(), t.getMovieId());
                     gbc.fill = GridBagConstraints.BOTH;
                     gb.setConstraints(jPanel2, gbc);
                     jp.add(jPanel2);
@@ -133,7 +133,7 @@ public class OrderPanel extends JFrame {
         return titlePanel;
     }
 
-    public JPanel addTimeTable(int timetableId,Time startTime, Time endTime, int roomId, double price) {
+    public JPanel addTimeTable(int timetableId,Time startTime, Time endTime, int roomId, double price, int movieId) {
         JPanel timeTablePanel = new JPanel();
         Border border = BorderFactory.createLineBorder(Color.BLACK);
         timeTablePanel.setBorder(border);
@@ -145,7 +145,7 @@ public class OrderPanel extends JFrame {
 
         b.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                new SeatPanel(account,roomId,timetableId).setVisible(true);
+                new SeatPanel(account,roomId,timetableId,movieId).setVisible(true);
             }
         });
         timeTablePanel.add(startTimeLabel);

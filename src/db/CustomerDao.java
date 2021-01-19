@@ -7,8 +7,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+
 
 /**
  *
@@ -25,7 +24,7 @@ public class CustomerDao {
     }
 
     public boolean insert(Customer c) {
-        String sql = "insert into customer(name,account,password,email,telephone) values(?,?,?,?,?)";
+        String sql = "insert into customer(name,account,password,email,telephone) ?,?,?,?,?)";
         PreparedStatement ps = null;
         try {
             ps = conn.prepareStatement(sql);

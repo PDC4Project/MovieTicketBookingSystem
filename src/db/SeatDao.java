@@ -18,7 +18,9 @@ public class SeatDao {
         db = new DB();
         conn = db.getConnection();
     }
-
+    public void insertSeatId(int roomId,int seatId,int timetableId){
+      //  String sql = "insert into seat room_id,sea"
+    }
     public List getSeatId(int roomId,int timetableId) {
         String sql = "select id from seat where room_id = " + roomId + "and timetable_id ="+ timetableId;
         ResultSet rs;

@@ -23,6 +23,7 @@ public class TimetableDao {
     public int getMovieId(int timetableId, int roomId){
         return 0;
     }
+    
     public List getList(int id) throws SQLException {
         String sql = "select * from timetable where movie_id ="+id;
         ResultSet rs = conn.createStatement().executeQuery(sql);

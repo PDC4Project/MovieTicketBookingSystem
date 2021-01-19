@@ -21,17 +21,7 @@ public class MovieDao {
         db = new DB();
         conn = db.getConnection();
     }
-
-    public void insert() {
-    }
-
-    public void delete() {
-    }
-
-    public void update() {
-    }
-
-  
+ 
     public List getList() throws SQLException {
         String sql = "select * from movie";
         ResultSet rs = conn.createStatement().executeQuery(sql);
