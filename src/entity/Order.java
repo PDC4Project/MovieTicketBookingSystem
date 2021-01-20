@@ -60,5 +60,5 @@ public class Order {
     public void setTimetableId(int timetableId) {
         this.timetableId = timetableId;
     }
-  
+
 }

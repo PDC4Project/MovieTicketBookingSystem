@@ -13,7 +13,6 @@ import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.text.DecimalFormat;
 import java.util.List;
 import javax.swing.BorderFactory;
@@ -53,12 +52,15 @@ public class MyOrderPanel extends JFrame {
 
         JScrollPane js = new JScrollPane(addOrderList(), ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
         this.setContentPane(js);
-
         this.setBounds(((Toolkit.getDefaultToolkit().getScreenSize().width) / 2) - 300,
                 ((Toolkit.getDefaultToolkit().getScreenSize().height) / 2) - 350, 500, 700);
         this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
     }
 
+    /**
+     *
+     * @return orderPanel
+     */
     public JPanel addOrderList() {
         JPanel orderPanel = new JPanel();
         orderPanel.setLayout(new GridLayout(0, 1));
@@ -73,6 +75,11 @@ public class MyOrderPanel extends JFrame {
         return orderPanel;
     }
 
+    /**
+     *
+     * @param order
+     * @return orderItemPanel
+     */
     public JPanel addOrderItem(Order order) {
         JPanel orderItemPanel = new JPanel();
         int seatId = order.getSeatId();
@@ -98,7 +105,7 @@ public class MyOrderPanel extends JFrame {
         JLabel timeLabel = new JLabel(timetable.getStartTime() + "-" + timetable.getEndTime());
         infoPanel.add("Center", timeLabel);
         //seat
-        JLabel seatLabel = new JLabel("Room: " + timetable.getRoomId() + "    Seat: " + "Row " + (seatId / 10 + 1) + " Column " + (seatId % 10+1));
+        JLabel seatLabel = new JLabel("Room: " + timetable.getRoomId() + "    Seat: " + "Row " + (seatId / 10 + 1) + " Column " + (seatId % 10 + 1));
         infoPanel.add("South", seatLabel);
         //price
         DecimalFormat dcmFmt = new DecimalFormat("0.0");
@@ -111,22 +118,19 @@ public class MyOrderPanel extends JFrame {
 
         //button
         JButton button = new JButton("Refund");
-        button.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                int flag = JOptionPane.showConfirmDialog(null, "Are you sure to refund the ticket?", "Refund", JOptionPane.YES_NO_OPTION);
-                if (flag == 0) {
-                    System.out.println("sure");
-                    //delete order
-                    orderDao.deleteOrderById(order.getId());
-                    //delete seat
-                    seatDao.deleteSeat(order.getSeatId(), order.getRoomId(), order.getTimetableId());
-                    frame.dispose();
-                    new MyOrderPanel(account).setVisible(true);
-
-                } else {
-                    System.out.println("no");
-                }
+        button.setBackground(Color.WHITE);
+        button.addActionListener((ActionEvent e) -> {
+            int flag = JOptionPane.showConfirmDialog(null, "Are you sure to refund the ticket?", "Refund", JOptionPane.YES_NO_OPTION);
+            if (flag == 0) {
+                //delete order
+                orderDao.deleteOrderById(order.getId());
+                //delete seat
+                seatDao.deleteSeat(order.getSeatId(), order.getRoomId(), order.getTimetableId());
+                frame.dispose();
+                new MyOrderPanel(account).setVisible(true);
+                
+            } else {
+                System.out.println("no");
             }
         });
         orderItemPanel.add("East", button);

@@ -5,6 +5,7 @@ package entity;
  * @author zk
  */
 public class Movie {
+
     int id;
     String name;
     String picUrl;
@@ -32,5 +33,5 @@ public class Movie {
     public void setPicUrl(String picUrl) {
         this.picUrl = picUrl;
     }
-    
+
 }

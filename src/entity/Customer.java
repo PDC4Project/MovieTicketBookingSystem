@@ -5,17 +5,19 @@ package entity;
  * @author dell
  */
 public class Customer {
+
     String name;
     String account;
     String password;
     String email;
     String telephone;
-    
-    public String getName(){
+
+    public String getName() {
         return name;
     }
-    public void setName(String name){
-        this.name=name;
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getAccount() {
@@ -25,24 +27,28 @@ public class Customer {
     public void setAccount(String account) {
         this.account = account;
     }
-    
-  
-    public String getPassword(){
+
+    public String getPassword() {
         return password;
     }
-    public void setPassword(String password){
-        this.password=password;
+
+    public void setPassword(String password) {
+        this.password = password;
     }
-    public String getEmail(){
+
+    public String getEmail() {
         return email;
     }
-    public void setEmail(String email){
-        this.email=email;
+
+    public void setEmail(String email) {
+        this.email = email;
     }
-    public String getTelephone(){
+
+    public String getTelephone() {
         return telephone;
     }
-    public void setTelephone(String telephone){
-        this.telephone=telephone;
+
+    public void setTelephone(String telephone) {
+        this.telephone = telephone;
     }
 }

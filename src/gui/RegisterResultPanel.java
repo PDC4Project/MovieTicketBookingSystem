@@ -16,27 +16,29 @@ import javax.swing.JLabel;
 public class RegisterResultPanel {
 
     private JFrame frame;
+
     public RegisterResultPanel() {
         init();
     }
+
     private void init() {
         frame = new JFrame();
-        frame.setBounds(((Toolkit.getDefaultToolkit().getScreenSize().width) / 2)-110,
-                ((Toolkit.getDefaultToolkit().getScreenSize().height) / 2)-100, 220, 200);
+        frame.setBounds(((Toolkit.getDefaultToolkit().getScreenSize().width) / 2) - 110,
+                ((Toolkit.getDefaultToolkit().getScreenSize().height) / 2) - 100, 220, 200);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setVisible(true);
         frame.setLayout(new BorderLayout());
         JLabel result = new JLabel("Register Successfully !");
         result.setFont(new Font("Arial", Font.PLAIN, 20));
-        
-        frame.getContentPane().add("Center",result);
+
+        frame.getContentPane().add("Center", result);
 
         JButton returnButton = new JButton("Return Login Panel!");
         returnButton.addActionListener((ActionEvent e) -> {
             new LoginPanel();
             frame.removeNotify();
         });
-        returnButton.setPreferredSize(new Dimension(50,50));
-        frame.getContentPane().add("South",returnButton);
+        returnButton.setPreferredSize(new Dimension(50, 50));
+        frame.getContentPane().add("South", returnButton);
     }
 }

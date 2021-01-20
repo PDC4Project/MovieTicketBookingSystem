@@ -2,11 +2,8 @@ package gui;
 
 import db.CustomerDao;
 import entity.Customer;
-import gui.RegisterResultPanel;
-import java.awt.EventQueue;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.sql.SQLException;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
@@ -92,35 +89,33 @@ public class RegisterPanel extends JFrame {
         JButton buttonregister = new JButton("register");
         buttonregister.setBounds(233, 486, 120, 20);
         frame.add(buttonregister);
-        
-        buttonregister.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                customerDao = new CustomerDao();
-                Customer c = new Customer();
-                c.setName(nameTF.getText());
-                c.setAccount(accountTF.getText());
-                c.setPassword(String.valueOf(passwordTF.getPassword()));
-                c.setEmail(emailTF.getText());
-                c.setTelephone(telephoneTF.getText());
-                try {
-                    if (judgeRegister(accountTF.getText(), String.valueOf(passwordTF.getPassword()), String.valueOf(confirmPasswordTF.getPassword()))) {
-                        if (!customerDao.checkAccount(accountTF.getText())) {
-                            if (customerDao.insert(c)) {
-                                new RegisterResultPanel();
-                            }
-                        } else {
-                            JOptionPane.showMessageDialog(null, " The account has existed!",
-                                    " The account has existed! ", JOptionPane.ERROR_MESSAGE);
-                            new RegisterPanel();
+
+        buttonregister.addActionListener((ActionEvent e) -> {
+            customerDao = new CustomerDao();
+            Customer c = new Customer();
+            c.setName(nameTF.getText());
+            c.setAccount(accountTF.getText());
+            c.setPassword(String.valueOf(passwordTF.getPassword()));
+            c.setEmail(emailTF.getText());
+            c.setTelephone(telephoneTF.getText());
+            try {
+                if (judgeRegister(accountTF.getText(), String.valueOf(passwordTF.getPassword()), String.valueOf(confirmPasswordTF.getPassword()))) {
+                    if (!customerDao.checkAccount(accountTF.getText())) {
+                        if (customerDao.insert(c)) {
+                            new RegisterResultPanel();
                         }
                     } else {
+                        JOptionPane.showMessageDialog(null, " The account has existed!",
+                                " The account has existed! ", JOptionPane.ERROR_MESSAGE);
+                        new RegisterPanel();
                     }
-                } catch (SQLException | ClassNotFoundException ex) {
+                } else {
                 }
-                frame.removeNotify();
+            } catch (SQLException | ClassNotFoundException ex) {
             }
+            frame.removeNotify();
         });
-          
+
         JCheckBox checkBox = new JCheckBox("I have read and accpeted the instructions");
         checkBox.setBounds(100, 438, 366, 20);
         frame.add(checkBox);
