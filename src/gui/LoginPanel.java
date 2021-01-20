@@ -1,6 +1,7 @@
 package gui;
 
 import db.CustomerDao;
+import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.TextField;
 import java.awt.Toolkit;
@@ -10,6 +11,7 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
@@ -31,18 +33,19 @@ public class LoginPanel extends JFrame {
     public LoginPanel() {
         frame=this;
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setBounds(((Toolkit.getDefaultToolkit().getScreenSize().width) / 2) - 300,
-                ((Toolkit.getDefaultToolkit().getScreenSize().height) / 2) - 300, 500, 340);
+        frame.setBounds(((Toolkit.getDefaultToolkit().getScreenSize().width) / 2) - 250,
+                ((Toolkit.getDefaultToolkit().getScreenSize().height) / 2) - 170, 500, 340);
         frame.setVisible(true);
         frame.setResizable(false);
         frame.getContentPane().setLayout(null);
         frame.setTitle("Login Panel");
+        
 
-        label2 = new JLabel("account");
+        label2 = new JLabel("Account");
         label2.setBounds(125, 95, 64, 20);
         frame.add(label2);
 
-        label3 = new JLabel("password");
+        label3 = new JLabel("Password");
         label3.setBounds(125, 165, 64, 20);
         frame.add(label3);
 

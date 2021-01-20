@@ -16,6 +16,7 @@ import java.util.Map;
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JToggleButton;
 import static javax.swing.WindowConstants.DISPOSE_ON_CLOSE;
@@ -55,7 +56,7 @@ public class SeatPanel extends JFrame {
         jPanel.add("Center", addSeat(seatIdList));
         jPanel.add("South", addConfirmButton());
         this.setContentPane(jPanel);
-        this.setBounds(((Toolkit.getDefaultToolkit().getScreenSize().width) / 2) - 150, ((Toolkit.getDefaultToolkit().getScreenSize().height) / 2) - 150, 350, 350);
+        this.setBounds(((Toolkit.getDefaultToolkit().getScreenSize().width) / 2) - 175, ((Toolkit.getDefaultToolkit().getScreenSize().height) / 2) - 175, 350, 350);
         this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
     }
 
@@ -69,7 +70,6 @@ public class SeatPanel extends JFrame {
         }
         for (int j = 0; j < seatIdList.size(); j++) {
             bucket[seatIdList.get(j)] = 1;
-            System.out.println(seatIdList.get(j));
         }
         for (int i = 0; i < 80; i++) {
            
@@ -119,6 +119,7 @@ public class SeatPanel extends JFrame {
                 orderDao = new OrderDao();
                 if (orderMap.size() == 0) {
                     System.out.println("null");
+                    new JOptionPane().showMessageDialog(null,"Please choose a seat!","Have not chose!",JOptionPane.ERROR_MESSAGE);
                 } else {
                     orderDao.insert(orderMap);
                     seatDao.insertSeatId(seatMap);  
@@ -130,13 +131,4 @@ public class SeatPanel extends JFrame {
         return jPanel;
     }
 
-    public static void main(String args[]) {
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                int roomId = 2;
-                int timetableId = 2;
-                new SeatPanel("aaa", roomId, timetableId, 1).setVisible(true);
-            }
-        });
-    }
 }

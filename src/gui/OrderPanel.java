@@ -37,7 +37,7 @@ public class OrderPanel extends JFrame {
         this.account = account;
         this.setContentPane(addMoviePic());
         this.setBounds(((Toolkit.getDefaultToolkit().getScreenSize().width) / 2) - 300,
-                ((Toolkit.getDefaultToolkit().getScreenSize().height) / 2) - 300, 600, 700);
+                ((Toolkit.getDefaultToolkit().getScreenSize().height) / 2) - 350, 600, 700);
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
     }
 
@@ -62,9 +62,9 @@ public class OrderPanel extends JFrame {
                 gbc.gridy = 0;
                 gbc.gridwidth = 1;
                 gbc.gridheight = 2;
-                JLabel jLabel2 = new JLabel(movie.getName());
-                gb.setConstraints(jLabel2, gbc);
-                jp.add(jLabel2);
+                JLabel movieNameLabel = new JLabel(movie.getName());
+                gb.setConstraints(movieNameLabel, gbc);
+                jp.add(movieNameLabel);
 
                 ImageIcon image = new ImageIcon(movie.getPicUrl());
                 image.setImage(image.getImage().getScaledInstance(200, 240, Image.SCALE_DEFAULT));
@@ -110,7 +110,19 @@ public class OrderPanel extends JFrame {
                         jp.add(blank);
                     }
                 }
+                JButton myOrderButton = new JButton("My Order");
+                myOrderButton.setBackground(Color.ORANGE);
+                myOrderButton.addActionListener(new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                         new MyOrderPanel(account).setVisible(true);
+                    }
+                });
+                jp.add(myOrderButton);
+                
                 tp.addTab("Movie " + (i + 1), scrollPane);
+              
+                
             }
         } catch (SQLException ex) {
         }
@@ -142,6 +154,7 @@ public class OrderPanel extends JFrame {
         JLabel roomLabel = new JLabel("Room" + roomId);
         JLabel priceLabel = new JLabel("￥" + price);
         JButton b = new JButton("选座购票");
+        b.setBackground(Color.ORANGE);
 
         b.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -154,11 +167,5 @@ public class OrderPanel extends JFrame {
         timeTablePanel.add(b);
 
         return timeTablePanel;
-    }
-
-    public static void main(String args[]) {
-        java.awt.EventQueue.invokeLater(() -> {
-            new OrderPanel("aaa").setVisible(true);
-        });
     }
 }

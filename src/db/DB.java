@@ -18,12 +18,10 @@ public class DB {
             String dbName = "TicketDB"; // the name of the database
             this.conn = DriverManager.getConnection(protocol + dbName
                     + ";create=false");
-            Class.forName(driver);
-            System.out.println("Connected to database: " + dbName);
+            Class.forName(driver);    
         } catch (SQLException | ClassNotFoundException ex) {
         }
     }
-
     public Connection getConnection() {
         return conn;
     }

@@ -38,7 +38,7 @@ public class RegisterPanel extends JFrame {
         frame.setResizable(false);
         frame.getContentPane().setLayout(null);
         frame.setBounds(((Toolkit.getDefaultToolkit().getScreenSize().width) / 2) - 300,
-                ((Toolkit.getDefaultToolkit().getScreenSize().height) / 2) - 300, 602, 580);
+                ((Toolkit.getDefaultToolkit().getScreenSize().height) / 2) - 290, 600, 580);
         jop = new JOptionPane();
 
         JLabel nameLabel = new JLabel("name:");
@@ -92,6 +92,7 @@ public class RegisterPanel extends JFrame {
         JButton buttonregister = new JButton("register");
         buttonregister.setBounds(233, 486, 120, 20);
         frame.add(buttonregister);
+        
         buttonregister.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 customerDao = new CustomerDao();
@@ -112,28 +113,24 @@ public class RegisterPanel extends JFrame {
                                     " The account has existed! ", JOptionPane.ERROR_MESSAGE);
                             new RegisterPanel();
                         }
-
                     } else {
                     }
                 } catch (SQLException | ClassNotFoundException ex) {
                 }
-
                 frame.removeNotify();
             }
         });
-
-        JCheckBox checkbox = new JCheckBox("I have read and accpeted the instructions");
-        checkbox.setBounds(100, 438, 366, 20);
-        frame.add(checkbox);
+          
+        JCheckBox checkBox = new JCheckBox("I have read and accpeted the instructions");
+        checkBox.setBounds(100, 438, 366, 20);
+        frame.add(checkBox);
     }
 
     public boolean judgeRegister(String account, String password, String confirmPassword) throws SQLException, ClassNotFoundException {
-
         if (account.equals("")) {
             JOptionPane.showMessageDialog(null, " Account cannot be empty! ",
                     "Account", JOptionPane.ERROR_MESSAGE);
             new RegisterPanel();
-
             return false;
         }
 
@@ -141,7 +138,6 @@ public class RegisterPanel extends JFrame {
             JOptionPane.showMessageDialog(null, "Password cannot be empty!",
                     "Password is empty", JOptionPane.ERROR_MESSAGE);
             new RegisterPanel();
-
             return false;
         }
 
@@ -149,23 +145,8 @@ public class RegisterPanel extends JFrame {
             JOptionPane.showMessageDialog(null, " The two passwords are inconsistent! ",
                     " The password is inconsistent ", JOptionPane.ERROR_MESSAGE);
             new RegisterPanel();
-
             return false;
         }
-
         return true;
-    }
-
-    public static void main(String[] args) {
-        EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                try {
-                    RegisterPanel window = new RegisterPanel();
-                    window.frame.setVisible(true);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        });
     }
 }
