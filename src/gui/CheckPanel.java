@@ -10,6 +10,7 @@ package gui;
  */
 import db.CustomerDao;
 import java.awt.Color;
+import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.TextField;
 import java.awt.event.ActionEvent;
@@ -70,9 +71,9 @@ public class CheckPanel extends JFrame{
         });  
     }
     
-    public JPanel addMessage() {
-        JPanel m = new JPanel();
-        m.setLayout(new GridLayout(1,4));
+    public JPanel addMessage(JPanel m) {
+        m.setLayout(new FlowLayout(FlowLayout.LEADING,20,20));
+        m.setBackground(Color.gray);
         m.setBorder(BorderFactory.createTitledBorder("电影订单"));
 
         JLabel l1 = new JLabel("name");
@@ -84,6 +85,7 @@ public class CheckPanel extends JFrame{
         m.add(l3);
         m.add(l4);
         return m;
+        //从数据库中返回一条订票信息
     } 
     
 

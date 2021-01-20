@@ -46,6 +46,8 @@ class RefundPanel extends JFrame{
         ReturnButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 
+                //delete the database
+                
             }
         });
 
