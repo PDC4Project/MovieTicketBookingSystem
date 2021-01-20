@@ -35,31 +35,32 @@ public class CheckPanel extends JFrame{
 
     private static void placeComponents(JPanel panel) {
 
-        panel.setLayout(null);
+        panel.setLayout(new FlowLayout(FlowLayout.LEADING,20,20));
+        panel.setBackground(Color.LIGHT_GRAY);
+        panel.setBorder(BorderFactory.createTitledBorder("电影订单"));
 
+        JLabel m = new JLabel("电影 ："+"name"+"  时间 ："+"time"+"  厅号 ："+"room"+"  座位 ："+"seat");
+        panel.add(m);
+//        JLabel userLabel = new JLabel("订票成功！");
+//        userLabel.setBounds(280,20,80,25);
+//        panel.add(userLabel);
+//
+//        JLabel Label_11 = new JLabel("电影名称：");
+//        Label_11.setBounds(10,50,80,25);
+//        panel.add(Label_11);
+//        
+//        JLabel Label_21 = new JLabel("放映时间：");
+//        Label_21.setBounds(140,50,80,25);
+//        panel.add(Label_21);
+//       
+//        JLabel Label_31 = new JLabel("放映厅号：");
+//        Label_31.setBounds(270,50,80,25);
+//        panel.add(Label_31); 
+//        
+//        JLabel Label_41 = new JLabel("您的座位：");
+//        Label_41.setBounds(400,50,80,25);
+//        panel.add(Label_41);     
 
-        JLabel userLabel = new JLabel("订票成功！");
-        userLabel.setBounds(280,20,80,25);
-        panel.add(userLabel);
-
-        JLabel Label_11 = new JLabel("电影名称：");
-        Label_11.setBounds(10,50,80,25);
-        panel.add(Label_11);
-        
-        JLabel Label_21 = new JLabel("放映时间：");
-        Label_21.setBounds(140,50,80,25);
-        panel.add(Label_21);
-       
-        JLabel Label_31 = new JLabel("放映厅号：");
-        Label_31.setBounds(270,50,80,25);
-        panel.add(Label_31); 
-        
-        JLabel Label_41 = new JLabel("您的座位：");
-        Label_41.setBounds(400,50,80,25);
-        panel.add(Label_41);     
-//        JTable table = new JTable(10, 4);
-//        table.setBounds(10,80,500,160);
-//        panel.add(table);
         JButton r = new JButton("退票");
         r.setBounds(10, 500, 80, 25);
         panel.add(r);
@@ -70,23 +71,7 @@ public class CheckPanel extends JFrame{
             }
         });  
     }
-    
-    public JPanel addMessage(JPanel m) {
-        m.setLayout(new FlowLayout(FlowLayout.LEADING,20,20));
-        m.setBackground(Color.gray);
-        m.setBorder(BorderFactory.createTitledBorder("电影订单"));
-
-        JLabel l1 = new JLabel("name");
-        JLabel l2 = new JLabel("time");
-        JLabel l3 = new JLabel("room");
-        JLabel l4 = new JLabel("seat");
-        m.add(l1);
-        m.add(l2);
-        m.add(l3);
-        m.add(l4);
-        return m;
-        //从数据库中返回一条订票信息
-    } 
+   
     
 
      public static void main(String[] args) {    
