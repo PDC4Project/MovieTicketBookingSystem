@@ -18,15 +18,17 @@ public class OrderDao {
         db = new DB();
         conn = db.getConnection();
     }
-    public void deleteOrderById(int id){
-        String sql = "delete from order_movie where id = "+id;
+
+    public void deleteOrderById(int id) {
+        String sql = "delete from order_movie where id = " + id;
         try {
             PreparedStatement ps = conn.prepareStatement(sql);
-             ps.executeUpdate();
+            ps.executeUpdate();
         } catch (SQLException ex) {
         }
-      
+
     }
+
     public List<Order> getOrder(String account) {
         String sql = "select * from order_movie where account = ?";
         PreparedStatement ps = null;
@@ -42,7 +44,7 @@ public class OrderDao {
                 order.setMovieId(rs.getInt("movie_id"));
                 order.setRoomId(rs.getInt("room_id"));
                 order.setSeatId(rs.getInt("seat_id"));
-                order.setTimetableId(rs.getInt("timetable_id")); 
+                order.setTimetableId(rs.getInt("timetable_id"));
                 orderList.add(order);
             }
         } catch (SQLException ex) {

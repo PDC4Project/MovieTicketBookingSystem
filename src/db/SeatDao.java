@@ -1,6 +1,5 @@
 package db;
 
-import entity.Order;
 import entity.Seat;
 import java.sql.Connection;
 import java.sql.PreparedStatement;

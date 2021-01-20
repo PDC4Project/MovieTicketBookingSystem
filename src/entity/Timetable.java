@@ -7,6 +7,7 @@ import java.sql.Time;
  * @author zk
  */
 public class Timetable {
+
     int id;
     int movieId;
     int roomId;
@@ -61,5 +62,5 @@ public class Timetable {
     public void setPrice(double price) {
         this.price = price;
     }
-    
+
 }

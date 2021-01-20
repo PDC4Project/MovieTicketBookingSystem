@@ -11,7 +11,6 @@ import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.sql.SQLException;
 import java.sql.Time;
 import java.util.List;
@@ -33,6 +32,8 @@ public class OrderPanel extends JFrame {
 
     private JTabbedPane tp;
     private String account;
+    private MovieDao movieDao;
+
     public OrderPanel(String account) {
         this.account = account;
         this.setContentPane(addMoviePic());
@@ -41,10 +42,14 @@ public class OrderPanel extends JFrame {
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
     }
 
+    /**
+     *
+     * @return a tabbed pane of each movie
+     */
     public JTabbedPane addMoviePic() {
         tp = new JTabbedPane();
         try {
-            MovieDao movieDao = new MovieDao();
+            movieDao = new MovieDao();
             List<Movie> movieList = movieDao.getList();
             for (int i = 0; i < movieList.size(); i++) {
                 Movie movie = movieList.get(i);
@@ -57,7 +62,7 @@ public class OrderPanel extends JFrame {
                 gbc.anchor = GridBagConstraints.CENTER;
                 jp.setLayout(gb);
 
-                /*StartTime放映时间 RoomId放映厅 price售价  isBook选座购票*/
+                /*StartTime  RoomId  price  isBook*/
                 gbc.gridx = 0;
                 gbc.gridy = 0;
                 gbc.gridwidth = 1;
@@ -105,24 +110,18 @@ public class OrderPanel extends JFrame {
                         JPanel blank = new JPanel();
                         gbc.gridy = list.size() + 6 + k;
                         gbc.gridx = 0;
-                        gbc.gridheight = 1;                      
+                        gbc.gridheight = 1;
                         gb.setConstraints(blank, gbc);
                         jp.add(blank);
                     }
                 }
                 JButton myOrderButton = new JButton("My Order");
                 myOrderButton.setBackground(Color.ORANGE);
-                myOrderButton.addActionListener(new ActionListener() {
-                    @Override
-                    public void actionPerformed(ActionEvent e) {
-                         new MyOrderPanel(account).setVisible(true);
-                    }
+                myOrderButton.addActionListener((ActionEvent e) -> {
+                    new MyOrderPanel(account).setVisible(true);
                 });
                 jp.add(myOrderButton);
-                
                 tp.addTab("Movie " + (i + 1), scrollPane);
-              
-                
             }
         } catch (SQLException ex) {
         }
@@ -134,10 +133,10 @@ public class OrderPanel extends JFrame {
         titlePanel.setLayout(new GridLayout());
         Border border = BorderFactory.createLineBorder(Color.BLACK);
         titlePanel.setBorder(border);
-        JLabel l1 = new JLabel("放映时间");
-        JLabel l2 = new JLabel("放映厅");
-        JLabel l3 = new JLabel("售价");
-        JLabel l4 = new JLabel("选座购票");
+        JLabel l1 = new JLabel("Time Table");
+        JLabel l2 = new JLabel("Screening Room");
+        JLabel l3 = new JLabel("Price");
+        JLabel l4 = new JLabel("Choose Seat");
         titlePanel.add(l1);
         titlePanel.add(l2);
         titlePanel.add(l3);
@@ -145,7 +144,17 @@ public class OrderPanel extends JFrame {
         return titlePanel;
     }
 
-    public JPanel addTimeTable(int timetableId,Time startTime, Time endTime, int roomId, double price, int movieId) {
+    /**
+     *
+     * @param timetableId
+     * @param startTime
+     * @param endTime
+     * @param roomId
+     * @param price
+     * @param movieId
+     * @return timetablePanel
+     */
+    public JPanel addTimeTable(int timetableId, Time startTime, Time endTime, int roomId, double price, int movieId) {
         JPanel timeTablePanel = new JPanel();
         Border border = BorderFactory.createLineBorder(Color.BLACK);
         timeTablePanel.setBorder(border);
@@ -153,13 +162,11 @@ public class OrderPanel extends JFrame {
         JLabel startTimeLabel = new JLabel(startTime + "-" + endTime);
         JLabel roomLabel = new JLabel("Room" + roomId);
         JLabel priceLabel = new JLabel("￥" + price);
-        JButton b = new JButton("选座购票");
+        JButton b = new JButton("Choose Seat");
         b.setBackground(Color.ORANGE);
 
-        b.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                new SeatPanel(account,roomId,timetableId,movieId).setVisible(true);
-            }
+        b.addActionListener((ActionEvent e) -> {
+            new SeatPanel(account, roomId, timetableId, movieId).setVisible(true);
         });
         timeTablePanel.add(startTimeLabel);
         timeTablePanel.add(roomLabel);

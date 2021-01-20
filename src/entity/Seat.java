@@ -5,6 +5,7 @@ package entity;
  * @author zk
  */
 public class Seat {
+
     int id;
     int roomId;
     int timetableId;
@@ -31,6 +32,6 @@ public class Seat {
 
     public void setTimetableId(int timetableId) {
         this.timetableId = timetableId;
-    } 
- 
+    }
+
 }

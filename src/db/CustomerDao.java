@@ -8,7 +8,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-
 /**
  *
  * @author dell
@@ -24,7 +23,7 @@ public class CustomerDao {
     }
 
     public boolean insert(Customer c) {
-        String sql = "insert into customer(name,account,password,email,telephone) ?,?,?,?,?)";
+        String sql = "insert into customer(name,account,password,email,telephone) values (?,?,?,?,?)";
         PreparedStatement ps = null;
         try {
             ps = conn.prepareStatement(sql);
@@ -52,14 +51,16 @@ public class CustomerDao {
         }
         return rs;
     }
-    public boolean checkAccount(String account){      
-        String sql  = "select * from customer where account = "+account;
+
+    public boolean checkAccount(String account) {
+        String sql = "select * from customer where account = " + account;
         try {
-           return conn.createStatement().execute(sql);
+            return conn.createStatement().execute(sql);
         } catch (SQLException ex) {
         }
         return false;
     }
+
     public List getList() throws SQLException {
         String sql = "select * from CUSTOMER";
         ResultSet rs = conn.createStatement().executeQuery(sql);
